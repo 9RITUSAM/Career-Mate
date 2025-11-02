@@ -5,7 +5,8 @@ export default function TechNews() {
   const [news, setNews] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:5000/api/tech-news")
+    console.log(process.env.NEXT_PUBLIC_API_URL)
+    fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/tech-news`)
       .then(async (res) => {
         if (!res.ok) {
           const text = await res.text();

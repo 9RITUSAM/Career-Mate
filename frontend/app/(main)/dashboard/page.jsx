@@ -16,7 +16,7 @@ import {
 } from "recharts";
 import TechNews from "./Tech";
 
-const API_URL = "http://localhost:5000";
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 const Dashboard = () => {
   const { user, isLoaded, isSignedIn } = useUser();
@@ -41,7 +41,7 @@ const Dashboard = () => {
       try {
         const userId = user.id;
 
-        
+        console.log('API_URL', API_URL)
         const [tasksRes, studentStatsRes, newsRes, hackRes] = await Promise.allSettled([
           fetch(`${API_URL}/api/tasks/${userId}`),
           fetch(`${API_URL}/api/student-stats/${userId}`),

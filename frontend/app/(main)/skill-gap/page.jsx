@@ -159,7 +159,7 @@ const SkillGapPage = () => {
 
       setLoading(true);
       try {
-        const res = await axios.get(`${API_URL}/api/student-stats/${user.id}`);
+        const res = await axios.get(`${API_URL}/api/skillgap/${user.id}`);
         if (res.data) {
           setCgpaScores(res.data.cgpaScores || [{ semester: 1, cgpa: "" }]);
           setAttendance(res.data.attendanceRecords || [{ subject: "", percentage: "" }]);
@@ -176,23 +176,6 @@ const SkillGapPage = () => {
 
     fetchData();
   }, [isLoaded, isSignedIn, user?.id]);
-
-  // Ensure default values for cgpaScores and attendance
-  useEffect(() => {
-    setCgpaScores((prev) =>
-      prev.map((item) => ({
-        semester: item.semester || "", // Default to empty string
-        cgpa: item.cgpa || "", // Default to empty string
-      }))
-    );
-
-    setAttendance((prev) =>
-      prev.map((item) => ({
-        subject: item.subject || "", // Default to empty string
-        percentage: item.percentage || "", // Default to empty string
-      }))
-    );
-  }, []);
 
   // ✅ Save data
   const handleSubmit = async (e) => {
